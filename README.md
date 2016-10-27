@@ -4,7 +4,7 @@ TLSSocketFacory is TLS1.2 (HTTPS connection) capable with Java6 powered by Bounc
 ## How to use
 HttpsURLConnection.setDefaultSSLSocketFactory(new TLSSocketFactory());
 
-## BouncyCastle maven repositry
+## BouncyCastle maven repository
 		<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-debug-jdk15on -->
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
