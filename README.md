@@ -1,6 +1,9 @@
 # TLSSocketFactory
 TLSSocketFacory is TLS1.2 (HTTPS connection) capable with Java6 powered by BouncyCastle
 
+# License
+MIT X11 License
+
 ## How to use
 HttpsURLConnection.setDefaultSSLSocketFactory(new TLSSocketFactory());
 
