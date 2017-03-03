@@ -9,6 +9,7 @@ import org.bouncycastle.crypto.tls.DefaultTlsClient;
 import org.bouncycastle.crypto.tls.ExtensionType;
 import org.bouncycastle.crypto.tls.ProtocolVersion;
 import org.bouncycastle.crypto.tls.TlsAuthentication;
+import org.bouncycastle.crypto.tls.TlsECCUtils;
 import org.bouncycastle.crypto.tls.TlsSession;
 import org.bouncycastle.crypto.tls.TlsUtils;
 
@@ -98,6 +99,23 @@ public class TLSClient extends DefaultTlsClient {
 
 		clientExtensions.put(ExtensionType.server_name, baos.toByteArray());
 		return clientExtensions;
+	}
+
+	@Override
+	protected boolean allowUnexpectedServerExtension(Integer extensionType, byte[] extensionData) throws IOException {
+
+		switch (extensionType.intValue()) {
+		case ExtensionType.ec_point_formats:
+			/*
+			 * Exception added based on field reports that some servers send Supported
+			 * Point Format Extension even when not negotiating an ECC cipher suite.
+			 * If present, we still require that it is a valid ECPointFormatList.
+			 */
+			TlsECCUtils.readSupportedPointFormatsExtension(extensionData);
+			return true;
+		default:
+			return super.allowUnexpectedServerExtension(extensionType, extensionData);
+		}
 	}
 
 	@Override

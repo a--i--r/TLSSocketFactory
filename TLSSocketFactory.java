@@ -30,7 +30,7 @@ public class TLSSocketFactory extends SSLSocketFactory {
 
 	// random number generator
 	private	SecureRandom		secureRandom;
-	private boolean             selfSignPass = false;
+	private boolean				selfSignPass = false;
 
 	public TLSSocketFactory() {
 		secureRandom = new SecureRandom();
