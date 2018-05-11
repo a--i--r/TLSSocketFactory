@@ -21,6 +21,9 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
  */
 public class TLSSocketFactory extends SSLSocketFactory {
 
+    // default socket timeout (0:infinite)
+    public static final int SOCKET_TIMEOUT = 0;
+
 	// add bouncycastle provider
 	static {
 		if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
@@ -29,15 +32,21 @@ public class TLSSocketFactory extends SSLSocketFactory {
 	}
 
 	// random number generator
-	private	SecureRandom		secureRandom;
-	private boolean				selfSignPass = false;
+	private SecureRandom           secureRandom;
+	private boolean               selfSignPass = false;
+	private int                    soTimeout = SOCKET_TIMEOUT;
 
-	public TLSSocketFactory() {
+    public TLSSocketFactory() {
 		secureRandom = new SecureRandom();
 	}
+
 	public TLSSocketFactory(boolean selfSignPass) {
 	    this();
 	    this.selfSignPass = selfSignPass;
+	}
+	public TLSSocketFactory(boolean selfSignPass, int soTimeout) {
+	    this(selfSignPass);
+	    this.setSoTimeout(soTimeout);
 	}
 
 	public boolean isSelfSignPass() {
@@ -46,12 +55,21 @@ public class TLSSocketFactory extends SSLSocketFactory {
     public void setSelfSignPass(boolean selfSignPass) {
         this.selfSignPass = selfSignPass;
     }
+    public int getSoTimeout() {
+        return soTimeout;
+    }
+    public void setSoTimeout(int soTimeout) {
+        this.soTimeout = soTimeout;
+    }
+
     @Override
 	public Socket createSocket(Socket socket, String host, int port, boolean autoClose) throws IOException {
 
 		if (socket == null) {
 			socket = new Socket();
 		}
+		socket.setSoTimeout(this.soTimeout);
+
 		if (!socket.isConnected()) {
 			socket.connect(new InetSocketAddress(host, port));
 		}
