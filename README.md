@@ -7,13 +7,13 @@ MIT X11 License
 ## How to use
 
 * normal 
-HttpsURLConnection.setDefaultSSLSocketFactory(new TLSSocketFactory());
+`HttpsURLConnection.setDefaultSSLSocketFactory(new TLSSocketFactory());`
 
 * self-sign certificate connectable
-HttpsURLConnection.setDefaultSSLSocketFactory(new TLSSocketFactory(true));
+`HttpsURLConnection.setDefaultSSLSocketFactory(new TLSSocketFactory(true));`
 
 * configure socket timeout (millisec)
-HttpsURLConnection.setDefaultSSLSocketFactory(new TLSSocketFactory(true, 60000));
+`HttpsURLConnection.setDefaultSSLSocketFactory(new TLSSocketFactory(true, 60000));`
 
 ## BouncyCastle maven repository
 		<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-debug-jdk15on -->
