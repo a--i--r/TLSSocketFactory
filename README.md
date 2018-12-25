@@ -9,7 +9,7 @@ MIT X11 License
 * normal  
 `HttpsURLConnection.setDefaultSSLSocketFactory(new TLSSocketFactory());`
 
-* self-sign certificate connectable  
+* self-signed certificate connectable  
 `HttpsURLConnection.setDefaultSSLSocketFactory(new TLSSocketFactory(true));`
 
 * configure socket timeout (millisec)  
