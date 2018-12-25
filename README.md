@@ -13,6 +13,7 @@ MIT X11 License
 `HttpsURLConnection.setDefaultSSLSocketFactory(new TLSSocketFactory(true));`
 
 * configure socket timeout (millisec)  default=0
+
 `HttpsURLConnection.setDefaultSSLSocketFactory(new TLSSocketFactory(true, 60000));`
 
 ## BouncyCastle maven repository
